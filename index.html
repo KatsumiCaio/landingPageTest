@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Arte na Pele — Estúdio de Tatuagem</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #181818;
+            --card: #222224;
+            --accent: #c9a25c;
+            --muted: #b8b8b8;
+            --glass: rgba(255, 255, 255, 0.04);
+            --maxw: 1100px;
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Roboto, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+            color: #e6e6e6;
+            background: linear-gradient(180deg, #0b0b0c 0%, #0e0e10 100%);
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0
+        }
+
+        .brand {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            /* Remover min-width/min-height para não cortar a logo */
+            overflow: visible;
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 10px;
+            background: #fffbe6;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+            display: block;
+            border: 2px solid red;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            align-items: center
+        }
+
+        nav a {
+            padding: 8px 10px;
+            border-radius: 6px;
+            color: var(--muted);
+            font-weight: 500
+        }
+
+        nav a.cta {
+            background: var(--accent);
+            color: white;
+            padding: 10px 14px
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: transparent;
+            border: 0;
+            color: var(--muted)
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 32px;
+            align-items: center;
+            padding: 40px 0
+        }
+
+        .hero-left h1 {
+            font-family: Playfair Display, serif;
+            font-size: 44px;
+            margin: 0 0 12px
+        }
+
+        .hero-left p {
+            color: var(--muted);
+            line-height: 1.6;
+            margin: 0 0 18px
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 0;
+            font-weight: 700
+        }
+
+        .btn.outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--muted)
+        }
+
+        .card {
+            background: var(--card);
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6)
+        }
+
+        .studio-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .studio-info h3 {
+            margin: 0
+        }
+
+        .stats {
+            display: flex;
+            gap: 12px
+        }
+
+        .stat {
+            background: var(--glass);
+            padding: 10px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        section {
+            padding: 48px 0
+        }
+
+        h2.section-title {
+            font-family: Playfair Display, serif;
+            margin: 0 0 18px;
+            font-size: 28px
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .service {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            padding: 18px;
+            border-radius: 10px
+        }
+
+        .service h4 {
+            margin: 8px 0 6px
+        }
+
+        .service p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block
+        }
+
+        .cta-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, rgba(230, 57, 70, 0.12), rgba(230, 57, 70, 0.02));
+            gap: 18px
+        }
+
+        form {
+            display: grid;
+            gap: 12px
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            color: inherit
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        footer {
+            padding: 36px 0;
+            color: var(--muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.03)
+        }
+
+        /* responsive */
+        @media (max-width:980px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            nav {
+                display: none
+            }
+
+            .mobile-toggle {
+                display: block
+            }
+        }
+
+        @media (max-width:520px) {
+            .services {
+                grid-template-columns: 1fr
+            }
+
+            .gallery img {
+                height: 140px
+            }
+        }
+
+        /* modal gallery */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 60;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .18s ease, visibility .18s
+        }
+
+        .modal.open {
+            visibility: visible;
+            opacity: 1
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6)
+        }
+
+        .modal .close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: transparent;
+            color: #fff;
+            border: 0;
+            font-size: 28px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand" style="display:block;text-align:left;">
+                <div>
+                    <div
+                        style="font-family:Playfair Display,serif;font-weight:700;font-size:2rem;color:var(--accent);text-align:left;">
+                        ARTE NA PELE</div>
+                    <div
+                        style="font-size:15px;color:var(--accent);font-family:Playfair Display,serif;letter-spacing:2px;text-align:left;">
+                        EXPRESSÃO ÚNICA</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#servicos">Serviços</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#agende">Agende</a>
+                <a class="cta" href="tel:+551199999999">Ligar</a>
+            </nav>
+            <button class="mobile-toggle" aria-label="Abrir menu" onclick="toggleNav()">☰</button>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-left">
+                    <h1>Arte na Pele: expressão única em tatuagem</h1>
+                    <p>Transforme sua ideia em arte exclusiva. Estúdio especializado em tatuagens autorais, fineline,
+                        realismo e minimalismo. Atendimento personalizado, ambiente seguro e materiais esterilizados.
+                    </p>
+                    <div class="hero-cta">
+                        <a class="btn" href="https://wa.me/551199999999?text=Olá! Gostaria de agendar uma avaliação."
+                            target="_blank"
+                            style="background-color:#25D366;color:#181818;font-weight:700;display:inline-flex;align-items:center;gap:8px;">
+                            <img src="images/logowpp.png" alt="WhatsApp" width="22" height="22"
+                                style="display:inline-block;vertical-align:middle;">
+                            WhatsApp
+                        </a>
+                        <a class="btn outline" href="#portfolio">Ver portfólio</a>
+                    </div>
+                    <div style="margin-top:18px;display:flex;gap:10px;">
+                        <div class="card" style="display:flex;gap:12px;align-items:center">
+                            <div style="font-weight:700">+10 anos</div>
+                            <div style="color:var(--muted);font-size:13px">de experiência</div>
+                        </div>
+                        <div class="card" style="display:flex;gap:12px;align-items:center">
+                            <div style="font-weight:700">Higiene</div>
+                            <div style="color:var(--muted);font-size:13px">Materiais descartáveis e esterilizados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside>
+                    <div class="card">
+                        <h3>Próximos horários</h3>
+                        <div class="studio-info">
+                            <div class="stats">
+                                <div class="stat">Seg-Sex</div>
+                                <div class="stat">10h - 19h</div>
+                            </div>
+                            <div style="color:var(--muted);font-size:14px">Agende sua avaliação ou ligue para <a
+                                    href="tel:+551199999999" style="color:var(--accent)">+55 (11) 99999-9999</a></div>
+                        </div>
+                    </div>
+                    <div style="height:18px"></div>
+                    <div class="card">
+                        <h4>Localização</h4>
+                        <div style="font-size:14px;color:var(--muted)">Rua Exemplo, 123 — Bairro, Cidade</div>
+                        <div style="margin-top:10px"><a class="btn" href="https://www.google.com/maps"
+                                target="_blank">Como chegar</a></div>
+                    </div>
+                </aside>
+            </section>
+
+            <section id="servicos">
+                <h2 class="section-title">Serviços</h2>
+                <div class="services">
+                    <div class="service card">
+                        <div style="font-size:20px;color:var(--accent)">🎨</div>
+                        <h4>Tatuagem personalizada</h4>
+                        <p>Desenhos autorais e exclusivos, feitos sob medida para você.</p>
+                    </div>
+                    <div class="service card">
+                        <div style="font-size:20px;color:var(--accent)">🖋️</div>
+                        <h4>Fineline & Minimal</h4>
+                        <p>Traços finos e delicados, perfeitos para designs sutis.</p>
+                    </div>
+                    <div class="service card">
+                        <div style="font-size:20px;color:var(--accent)">🖤</div>
+                        <h4>Realismo</h4>
+                        <p>Sombras e detalhes para peças com profundidade e expressão.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="portfolio">
+                <h2 class="section-title">Portfólio</h2>
+                <div class="gallery" id="gallery">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1"
+                        alt="tattoo1" loading="lazy"
+                        data-full="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=1">
+                    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2"
+                        alt="tattoo2" loading="lazy"
+                        data-full="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=2">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3"
+                        alt="tattoo3" loading="lazy"
+                        data-full="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=3">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4"
+                        alt="tattoo4" loading="lazy"
+                        data-full="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=4">
+                </div>
+            </section>
+
+            <section id="contato">
+                <h2 class="section-title">Contato</h2>
+                <div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
+                    <div style="flex:1;min-width:220px">
+                        <div style="font-weight:700">Entre em contato</div>
+                        <div style="color:var(--muted);margin-top:6px">Telefone: <a href="tel:+551199999999"
+                                style="color:var(--accent)">+55 (11) 99999-9999</a></div>
+                        <div style="color:var(--muted);margin-top:6px">Email: <a href="mailto:contato@artenapele.com"
+                                style="color:var(--accent)">contato@artenapele.com</a></div>
+                        <div style="margin-top:8px;color:var(--muted);display:flex;align-items:center;gap:12px">
+                            <span style="display:inline-flex;align-items:center;gap:4px">
+                                <a href="#" style="color:var(--accent);display:inline-flex;align-items:center"
+                                    aria-label="Instagram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448"
+                                        fill="none">
+                                        <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c" />
+                                        <g>
+                                            <circle cx="224" cy="224" r="80" fill="#181818" fill-opacity="0.9" />
+                                            <circle cx="224" cy="224" r="60" fill="none" stroke="#fff"
+                                                stroke-width="12" />
+                                            <circle cx="320" cy="128" r="24" fill="#fff" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </span>
+                            •
+                            <span style="display:inline-flex;align-items:center;gap:4px">
+                                <a href="#" style="color:var(--accent);display:inline-flex;align-items:center"
+                                    aria-label="Facebook">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448"
+                                        fill="none">
+                                        <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c" />
+                                        <path
+                                            d="M280 160h-32c-8.8 0-16 7.2-16 16v32h48v48h-48v96h-48v-96h-32v-48h32v-32c0-35.3 28.7-64 64-64h32v48z"
+                                            fill="#181818" />
+                                    </svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="container">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+                <div>© Arte na Pele — Todos os direitos reservados</div>
+                <div style="color:var(--muted);font-size:13px">Feito com cuidado • Política de privacidade</div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal" id="modal">
+        <button class="close" onclick="closeModal()">✕</button>
+        <img src="" alt="visualizacao" id="modalImg">
+    </div>
+
+    <script>
+        function toggleNav() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+            nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // gallery modal
+        document.querySelectorAll('#gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                const src = img.getAttribute('data-full') || img.src;
+                const modal = document.getElementById('modal');
+                const modalImg = document.getElementById('modalImg');
+                modalImg.src = src;
+                modal.classList.add('open');
+            })
+        })
+        function closeModal() { document.getElementById('modal').classList.remove('open') }
+        document.getElementById('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal() })
+
+        function handleBooking(e) {
+            e.preventDefault();
+            const f = e.target;
+            // coletar dados — aqui você pode integrar com backend ou serviço de email
+            const data = Object.fromEntries(new FormData(f).entries());
+            // simples feedback visual
+            alert('Obrigado, ' + (data.nome || '') + '! Recebemos sua solicitação e vamos responder em breve.');
+            f.reset();
+            return false;
+        }
+    </script>
+</body>
+
+</html>
