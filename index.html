@@ -211,21 +211,36 @@
             <section id="faq">
                 <h2 class="section-title">Perguntas Frequentes (FAQ)</h2>
                 <div class="faq-list">
-                    <div class="card faq-item">
-                        <h4>Fazer tatuagem dói?</h4>
-                        <p>A dor varia conforme o local, tamanho e sensibilidade de cada pessoa. Em geral, é suportável
-                            e muitos clientes relatam que é menor do que imaginavam.</p>
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="1">
+                            <h4>Fazer tatuagem dói?</h4>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-1">
+                            <p>A dor varia conforme o local, tamanho e sensibilidade de cada pessoa. Em geral, é
+                                suportável e muitos clientes relatam que é menor do que imaginavam.</p>
+                        </div>
                     </div>
-                    <div class="card faq-item">
-                        <h4>Quais cuidados devo ter antes e depois da tatuagem?</h4>
-                        <p>Antes: evite álcool, mantenha a pele hidratada e alimente-se bem. Depois: siga as orientações
-                            do tatuador, mantenha a área limpa, use pomada cicatrizante e evite sol, piscina e mar por
-                            alguns dias.</p>
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="2">
+                            <h4>Quais cuidados devo ter antes e depois da tatuagem?</h4>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-2">
+                            <p>Antes: evite álcool, mantenha a pele hidratada e alimente-se bem. Depois: siga as
+                                orientações do tatuador, mantenha a área limpa, use pomada cicatrizante e evite sol,
+                                piscina e mar por alguns dias.</p>
+                        </div>
                     </div>
-                    <div class="card faq-item">
-                        <h4>Quanto custa uma tatuagem?</h4>
-                        <p>O valor depende do tamanho, estilo e complexidade do desenho. Agende uma avaliação para
-                            receber um orçamento personalizado.</p>
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="3">
+                            <h4>Quanto custa uma tatuagem?</h4>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-3">
+                            <p>O valor depende do tamanho, estilo e complexidade do desenho. Agende uma avaliação para
+                                receber um orçamento personalizado.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -525,6 +540,36 @@
         Array.from(document.querySelectorAll('nav a')).forEach(link => {
             link.addEventListener('click', handleNavLinkClick);
         });
+
+        // FAQ Accordion
+        function initFAQ() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqId = question.getAttribute('data-faq');
+                    const answer = document.getElementById(`faq-${faqId}`);
+                    const isOpen = answer.classList.contains('open');
+
+                    // Fechar todas as outras perguntas
+                    faqQuestions.forEach(q => {
+                        const qId = q.getAttribute('data-faq');
+                        const qAnswer = document.getElementById(`faq-${qId}`);
+                        q.classList.remove('active');
+                        qAnswer.classList.remove('open');
+                    });
+
+                    // Toggle da pergunta clicada
+                    if (!isOpen) {
+                        question.classList.add('active');
+                        answer.classList.add('open');
+                    }
+                });
+            });
+        }
+
+        // Inicializar FAQ quando a página carregar
+        document.addEventListener('DOMContentLoaded', initFAQ);
     </script>
 </body>
 
