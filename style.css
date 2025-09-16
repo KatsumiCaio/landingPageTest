@@ -448,7 +448,7 @@ aside > .card + .card {
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.35); /* opacidade reduzida */
+    background: rgba(0,0,0,0.65); /* fundo escuro original */
     z-index: 1000;
     transition: opacity 0.2s;
     opacity: 1;
@@ -459,7 +459,6 @@ aside > .card + .card {
     pointer-events: none;
 }
 
-/* MOBILE: menu hamburguer e drawer */
 @media (max-width: 900px) {
   nav {
     display: none;
@@ -468,10 +467,10 @@ aside > .card + .card {
     left: 50%;
     transform: translate(-50%, -50%);
     flex-direction: column;
-    background: #222224; /* cor sólida, mais clara que o fundo */
+    background: #181818; /* cor sólida escura original */
     border-radius: 18px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.45); /* sombra mais forte */
-    border: 2px solid #fff2; /* borda clara para destacar */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.32); /* sombra original */
+    border: none; /* remove borda clara */
     padding: 38px 32px;
     z-index: 1001;
     min-width: 220px;
@@ -492,15 +491,5 @@ aside > .card + .card {
     font-size: 2.2rem;
     color: var(--accent);
     cursor: pointer;
-  }
-  .menu-overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.55);
-    z-index: 1000;
   }
 }
