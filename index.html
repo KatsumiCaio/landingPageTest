@@ -392,6 +392,31 @@
             border: 0;
             font-size: 28px
         }
+
+        /* Espaçamento extra para localização */
+        .card h4 {
+            margin-bottom: 8px;
+        }
+
+        .card .localizacao-endereco {
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .card .localizacao-btn {
+            margin-top: 0;
+        }
+
+        /* Espaçamento entre cards do aside */
+        aside > .card + .card {
+            margin-top: 18px;
+        }
+
+        @media (max-width: 700px) {
+            aside > .card + .card {
+                margin-top: 14px;
+            }
+        }
     </style>
 </head>
 
@@ -465,8 +490,9 @@
                     <div style="height:18px"></div>
                     <div class="card">
                         <h4>Localização</h4>
-                        <div style="font-size:14px;color:var(--muted)">Rua Exemplo, 123 — Bairro, Cidade</div>
-                        <div style="margin-top:10px"><a class="btn" href="https://www.google.com/maps"
+                        <div class="localizacao-endereco" style="font-size:14px;color:var(--muted)">Rua Exemplo, 123 —
+                            Bairro, Cidade</div>
+                        <div class="localizacao-btn"><a class="btn" href="https://www.google.com/maps"
                                 target="_blank">Como chegar</a></div>
                     </div>
                 </aside>
