@@ -125,9 +125,10 @@ nav a.cta {
     transition: all 0.2s ease;
 }
 
-.btn:hover, .btn.outline:hover {
+.btn:hover,
+.btn.outline:hover {
     filter: brightness(1.08);
-    box-shadow: 0 2px 12px rgba(201,162,92,0.18);
+    box-shadow: 0 2px 12px rgba(201, 162, 92, 0.18);
 }
 
 a:hover {
@@ -197,6 +198,7 @@ h2.section-title {
     font-size: 14px;
 }
 
+/* Grid do Portfólio */
 .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -210,6 +212,165 @@ h2.section-title {
     border-radius: 8px;
     cursor: pointer;
     display: block;
+    transition: transform 0.2s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+}
+
+/* Modal com Carrossel */
+.modal-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #1a1a1a;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.modal-carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    touch-action: pan-y;
+}
+
+.modal-carousel-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+}
+
+.modal-carousel-slide img {
+    width: 100%;
+    height: 70vh;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+}
+
+/* Botões de navegação do modal */
+.modal-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.modal-carousel-btn:hover {
+    background: rgba(201, 162, 92, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-carousel-prev {
+    left: 20px;
+}
+
+.modal-carousel-next {
+    right: 20px;
+}
+
+/* Indicadores do modal */
+.modal-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-indicator.active {
+    background: var(--accent);
+    transform: scale(1.2);
+}
+
+.modal-indicator:hover {
+    background: var(--accent);
+    opacity: 0.8;
+}
+
+/* Responsividade do modal */
+@media (max-width: 700px) {
+    .modal-carousel-slide img {
+        height: 60vh;
+        max-height: 400px;
+        object-fit: contain;
+    }
+
+    .modal-carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-carousel-prev {
+        left: 15px;
+    }
+
+    .modal-carousel-next {
+        right: 15px;
+    }
+
+    .modal-carousel-indicators {
+        margin-top: 15px;
+    }
+
+    .modal-indicator {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .modal-carousel-slide img {
+        height: 50vh;
+        max-height: 300px;
+        object-fit: contain;
+    }
+
+    .modal-carousel-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .modal-carousel-prev {
+        left: 10px;
+    }
+
+    .modal-carousel-next {
+        right: 10px;
+    }
 }
 
 .cta-banner {
@@ -258,20 +419,23 @@ footer {
     z-index: 10;
     position: relative;
 }
+
 .social-icons a {
     color: var(--accent);
     transition: filter 0.2s;
 }
+
 .social-icons a:hover {
     filter: brightness(1.2);
 }
+
 @media (max-width: 900px) {
-  .social-icons {
-    justify-content: center;
-    margin-bottom: 12px;
-    z-index: 1003;
-    position: relative;
-  }
+    .social-icons {
+        justify-content: center;
+        margin-bottom: 12px;
+        z-index: 1003;
+        position: relative;
+    }
 }
 
 /* FAQ */
@@ -281,27 +445,32 @@ footer {
     gap: 18px;
     margin-bottom: 32px;
 }
+
 .faq-item {
     background: var(--card);
     padding: 22px;
     border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
 }
+
 .faq-item h4 {
     margin: 0 0 8px;
     color: var(--accent);
     font-size: 18px;
 }
+
 .faq-item p {
     margin: 0;
     color: var(--muted);
     font-size: 15px;
 }
+
 @media (max-width: 700px) {
     .faq-list {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+
     .faq-item {
         padding: 14px;
     }
@@ -312,12 +481,15 @@ footer {
     .hero {
         grid-template-columns: 1fr;
     }
+
     .gallery {
         grid-template-columns: repeat(2, 1fr);
     }
+
     nav {
         display: none;
     }
+
     .mobile-toggle {
         display: block;
     }
@@ -327,51 +499,63 @@ footer {
     .container {
         padding: 0 8px;
     }
+
     header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
         padding: 16px 0;
     }
+
     .brand {
         flex-direction: row;
         gap: 8px;
     }
+
     .logo {
         width: 56px;
         height: 56px;
     }
+
     .hero {
         grid-template-columns: 1fr;
         gap: 18px;
         padding: 24px 0;
     }
+
     .hero-left h1 {
         font-size: 28px;
     }
+
     .gallery {
         grid-template-columns: 1fr;
         gap: 8px;
     }
+
     .gallery img {
         height: 120px;
     }
+
     .services {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+
     .card {
         padding: 14px;
     }
+
     .cta-banner {
         flex-direction: column;
         gap: 10px;
         padding: 14px;
     }
+
     .depoimentos {
         grid-template-columns: 1fr;
         gap: 10px;
     }
+
     footer.container {
         flex-direction: column;
         gap: 8px;
@@ -383,9 +567,11 @@ footer {
     .hero-left h1 {
         font-size: 20px;
     }
+
     .gallery img {
         height: 80px;
     }
+
     .card {
         padding: 8px;
     }
@@ -443,12 +629,12 @@ footer {
 }
 
 /* Espaçamento entre cards do aside */
-aside > .card + .card {
+aside>.card+.card {
     margin-top: 18px;
 }
 
 @media (max-width: 700px) {
-    aside > .card + .card {
+    aside>.card+.card {
         margin-top: 14px;
     }
 }
@@ -457,48 +643,55 @@ aside > .card + .card {
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.65); /* fundo escuro original */
+    background: rgba(0, 0, 0, 0.65);
+    /* fundo escuro original */
     z-index: 1000;
     transition: opacity 0.2s;
     opacity: 1;
     pointer-events: auto;
 }
+
 .menu-overlay[style*="display: none"] {
     opacity: 0;
     pointer-events: none;
 }
 
 @media (max-width: 900px) {
-  nav {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-    background: #181818; /* cor sólida escura original */
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.32); /* sombra original */
-    border: none; /* remove borda clara */
-    padding: 38px 32px;
-    z-index: 1001;
-    min-width: 220px;
-    gap: 28px;
-    filter: none;
-  }
-  nav.nav-open {
-    display: flex;
-  }
-  .mobile-toggle {
-    display: block;
-    position: absolute;
-    right: 18px;
-    top: 18px;
-    z-index: 1002;
-    background: none;
-    border: none;
-    font-size: 2.2rem;
-    color: var(--accent);
-    cursor: pointer;
-  }
+    nav {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        flex-direction: column;
+        background: #181818;
+        /* cor sólida escura original */
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32);
+        /* sombra original */
+        border: none;
+        /* remove borda clara */
+        padding: 38px 32px;
+        z-index: 1001;
+        min-width: 220px;
+        gap: 28px;
+        filter: none;
+    }
+
+    nav.nav-open {
+        display: flex;
+    }
+
+    .mobile-toggle {
+        display: block;
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        z-index: 1002;
+        background: none;
+        border: none;
+        font-size: 2.2rem;
+        color: var(--accent);
+        cursor: pointer;
+    }
 }
