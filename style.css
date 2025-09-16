@@ -296,25 +296,6 @@ footer {
         width: 56px;
         height: 56px;
     }
-    nav {
-        /* Removido o bloco que sobrescrevia o drawer */
-    }
-    nav.nav-open {
-        display: flex !important;
-        flex-direction: column !important;
-        background: var(--card);
-        padding: 18px 16px;
-        border-radius: 16px;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        min-width: 220px;
-        max-width: 90vw;
-        box-shadow: 0 6px 30px rgba(0,0,0,0.4);
-        z-index: 101;
-        gap: 16px;
-    }
     .hero {
         grid-template-columns: 1fr;
         gap: 18px;
