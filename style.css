@@ -448,7 +448,7 @@ aside > .card + .card {
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.65);
+    background: rgba(0,0,0,0.35); /* opacidade reduzida */
     z-index: 1000;
     transition: opacity 0.2s;
     opacity: 1;
@@ -468,14 +468,15 @@ aside > .card + .card {
     left: 50%;
     transform: translate(-50%, -50%);
     flex-direction: column;
-    background: #181818;
+    background: #222224; /* cor sólida, mais clara que o fundo */
     border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.32);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45); /* sombra mais forte */
+    border: 2px solid #fff2; /* borda clara para destacar */
     padding: 38px 32px;
-    z-index: 1001; /* menu acima do overlay */
+    z-index: 1001;
     min-width: 220px;
     gap: 28px;
-    filter: none; /* garante que não fique escurecido */
+    filter: none;
   }
   nav.nav-open {
     display: flex;
