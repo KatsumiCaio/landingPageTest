@@ -184,7 +184,8 @@
                                 style="color:var(--accent)">+55 (11) 99999-9999</a></div>
                         <div style="color:var(--muted);margin-top:6px">Email: <a href="mailto:contato@artenapele.com"
                                 style="color:var(--accent)">contato@artenapele.com</a></div>
-                        <div style="margin-top:8px;color:var(--muted);display:flex;align-items:center;gap:12px">
+                        <div style="margin-top:8px;color:var(--muted);display:flex;align-items:center;gap:12px"
+                            class="social-icons">
                             <span style="display:inline-flex;align-items:center;gap:4px">
                                 <a href="#" style="color:var(--accent);display:inline-flex;align-items:center"
                                     aria-label="Instagram">
@@ -230,19 +231,24 @@
         <button class="close" onclick="closeModal()">✕</button>
         <img src="" alt="visualizacao" id="modalImg">
     </div>
+    <div class="menu-overlay" id="menuOverlay" style="display:none;"></div>
 
     <script>
         function toggleNav() {
             const nav = document.querySelector('nav');
+            const overlay = document.getElementById('menuOverlay');
             if (!nav) return;
             if (nav.classList.contains('nav-open')) {
                 nav.classList.remove('nav-open');
-                nav.style.display = 'none';
+                overlay.style.display = 'none';
             } else {
                 nav.classList.add('nav-open');
-                nav.style.display = 'flex';
+                overlay.style.display = 'block';
             }
         }
+        document.getElementById('menuOverlay').addEventListener('click', function() {
+            toggleNav();
+        });
 
         // gallery modal
         document.querySelectorAll('#gallery img').forEach(img => {
