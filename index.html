@@ -273,6 +273,31 @@
             f.reset();
             return false;
         }
+
+        // Fecha o menu e faz scroll suave ao clicar em um link do menu mobile
+        function handleNavLinkClick(e) {
+            const nav = document.querySelector('nav');
+            const overlay = document.getElementById('menuOverlay');
+            if (window.innerWidth <= 900) {
+                nav.classList.remove('nav-open');
+                overlay.style.display = 'none';
+                // Scroll suave para o destino
+                const href = e.currentTarget.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        setTimeout(() => {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 180); // espera o menu fechar
+                    }
+                }
+                e.preventDefault();
+            }
+        }
+        // Adiciona evento aos links do menu
+        Array.from(document.querySelectorAll('nav a')).forEach(link => {
+            link.addEventListener('click', handleNavLinkClick);
+        });
     </script>
 </body>
 
