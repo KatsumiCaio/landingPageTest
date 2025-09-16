@@ -297,10 +297,7 @@ footer {
         height: 56px;
     }
     nav {
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-        margin-top: 8px;
+        /* Removido o bloco que sobrescrevia o drawer */
     }
     nav.nav-open {
         display: flex !important;
@@ -317,20 +314,6 @@ footer {
         box-shadow: 0 6px 30px rgba(0,0,0,0.4);
         z-index: 101;
         gap: 16px;
-    }
-    @media (max-width: 700px) {
-        nav {
-            position: static;
-            background: none;
-            padding: 0;
-            border-radius: 0;
-            min-width: unset;
-            box-shadow: none;
-            left: unset;
-            top: unset;
-            transform: unset;
-            max-width: unset;
-        }
     }
     .hero {
         grid-template-columns: 1fr;
