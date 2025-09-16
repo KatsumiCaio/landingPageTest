@@ -277,6 +277,30 @@ footer {
         width: 100%;
         margin-top: 8px;
     }
+    nav.nav-open {
+        flex-direction: column !important;
+        background: var(--card);
+        padding: 12px;
+        border-radius: 12px;
+        position: absolute;
+        top: 70px;
+        right: 18px;
+        min-width: 160px;
+        box-shadow: 0 6px 30px rgba(0,0,0,0.4);
+        z-index: 100;
+        display: flex !important;
+        gap: 10px;
+    }
+    @media (max-width: 700px) {
+        nav {
+            position: static;
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            min-width: unset;
+            box-shadow: none;
+        }
+    }
     .hero {
         grid-template-columns: 1fr;
         gap: 18px;

@@ -235,7 +235,13 @@
         function toggleNav() {
             const nav = document.querySelector('nav');
             if (!nav) return;
-            nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
+            if (nav.classList.contains('nav-open')) {
+                nav.classList.remove('nav-open');
+                nav.style.display = 'none';
+            } else {
+                nav.classList.add('nav-open');
+                nav.style.display = 'flex';
+            }
         }
 
         // gallery modal
