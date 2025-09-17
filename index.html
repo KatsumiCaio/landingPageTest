@@ -179,49 +179,8 @@
                                 <option value="Sexta">Sexta</option>
                             </select>
                         </div>
-                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-                            <button class="btn outline" id="limparAgendaBtn">Limpar exemplos</button>
-                        </div>
                     </div>
-
                     <div class="agenda-grid" id="agendaGrid" aria-live="polite"></div>
-
-                    <details style="margin-top:14px">
-                        <summary style="cursor:pointer;color:var(--accent);font-weight:600">Adicionar sessão</summary>
-                        <form id="agendaForm" onsubmit="return handleAgendaAdd(event)" style="margin-top:12px">
-                            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;align-items:end">
-                                <div>
-                                    <label for="dia" style="display:block;color:var(--muted);font-size:13px">Dia</label>
-                                    <select id="dia" name="dia" required>
-                                        <option value="Segunda">Segunda</option>
-                                        <option value="Terça">Terça</option>
-                                        <option value="Quarta">Quarta</option>
-                                        <option value="Quinta">Quinta</option>
-                                        <option value="Sexta">Sexta</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="inicio" style="display:block;color:var(--muted);font-size:13px">Início</label>
-                                    <input id="inicio" name="inicio" type="time" min="10:00" max="19:00" required>
-                                </div>
-                                <div>
-                                    <label for="fim" style="display:block;color:var(--muted);font-size:13px">Fim</label>
-                                    <input id="fim" name="fim" type="time" min="10:00" max="19:59" required>
-                                </div>
-                                <div>
-                                    <label for="cliente" style="display:block;color:var(--muted);font-size:13px">Cliente</label>
-                                    <input id="cliente" name="cliente" type="text" placeholder="Nome do cliente" required>
-                                </div>
-                                <div>
-                                    <label for="descricao" style="display:block;color:var(--muted);font-size:13px">Descrição</label>
-                                    <input id="descricao" name="descricao" type="text" placeholder="Ex: Fineline no pulso">
-                                </div>
-                                <div>
-                                    <button class="btn" type="submit">Adicionar</button>
-                                </div>
-                            </div>
-                        </form>
-                    </details>
                 </div>
             </section>
 
@@ -706,8 +665,6 @@
         const DIAS = ['Segunda','Terça','Quarta','Quinta','Sexta'];
         let selectedDiaMobile = null;
 
-        
-
         function carregarAgenda() {
             try {
                 const rawV2 = localStorage.getItem(AGENDA_KEY);
@@ -787,9 +744,9 @@
                         const isEnd = end > slotStartMin && end <= slotEndMin;
                         classe = `ocupado ${isStart ? 'start' : isEnd ? 'end' : 'middle'}`;
                         if (isStart) {
-                            conteudo = `<div class=\"sessao\"><div class=\"cliente\">${covering.cliente}</div><div class=\"desc\">${covering.descricao || ''}</div><div class=\"intervalo\">${covering.inicio}–${covering.fim}</div></div>`;
+                            conteudo = `<div class="sessao"><div class="cliente">${covering.cliente}</div><div class="desc">${covering.descricao || ''}</div><div class="intervalo">${covering.inicio}–${covering.fim}</div></div>`;
                         } else {
-                            conteudo = `<div class=\"sessao-cont\"></div>`;
+                            conteudo = `<div class="sessao-cont"></div>`;
                         }
                     } else {
                         // marca livre para conectar blocos livres visualmente
@@ -812,24 +769,7 @@
             }).join('');
         }
 
-        function handleAgendaAdd(e) {
-            e.preventDefault();
-            const f = e.target;
-            const data = Object.fromEntries(new FormData(f).entries());
-            if (!DIAS.includes(data.dia)) return false;
-            if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(data.inicio)) return false;
-            if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(data.fim)) return false;
-            if (hmToMinutes(data.fim) <= hmToMinutes(data.inicio)) { alert('Horário de fim deve ser após o início.'); return false; }
-            const items = carregarAgenda();
-            items.push({ dia: data.dia, inicio: data.inicio, fim: data.fim, cliente: data.cliente, descricao: data.descricao });
-            salvarAgenda(items);
-            renderizarAgenda();
-            f.reset();
-            return false;
-        }
-
         function initAgenda() {
-            const limparBtn = document.getElementById('limparAgendaBtn');
             const diaMobileSel = document.getElementById('agendaDiaMobile');
             
             // Seleciona dia atual por padrão (seg-sex). Sabado/Domingo => Segunda
@@ -848,13 +788,6 @@
             window.addEventListener('resize', () => {
                 renderizarAgenda();
             });
-            if (limparBtn) {
-                limparBtn.addEventListener('click', () => {
-                    localStorage.removeItem(AGENDA_KEY);
-                    gerarExemplosSeVazio();
-                    renderizarAgenda();
-                });
-            }
             gerarExemplosSeVazio();
             renderizarAgenda();
         }
