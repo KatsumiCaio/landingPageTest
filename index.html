@@ -59,6 +59,7 @@
             <nav>
                 <a href="#servicos">Serviços</a>
                 <a href="#portfolio">Portfólio</a>
+                <a href="#agenda">Agenda</a>
                 <a href="#agende">Agende</a>
                 <a class="cta" href="tel:+551199999999">Ligar</a>
             </nav>
@@ -161,6 +162,66 @@
                         data-full="images/Tatoos exemplos/tatoo3.jpg" data-index="2">
                     <img src="images/Tatoos exemplos/tatoo4.jpg" alt="Tatuagem 4" loading="lazy"
                         data-full="images/Tatoos exemplos/tatoo4.jpg" data-index="3">
+                </div>
+            </section>
+
+            <section id="agenda">
+                <h2 class="section-title">Agenda</h2>
+                <div class="card">
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px">
+                        <div class="agenda-mobile-filter" style="display:none;gap:10px;align-items:center;flex-wrap:wrap">
+                            <label for="agendaDiaMobile" style="color:var(--muted)">Dia:</label>
+                            <select id="agendaDiaMobile">
+                                <option value="Segunda">Segunda</option>
+                                <option value="Terça">Terça</option>
+                                <option value="Quarta">Quarta</option>
+                                <option value="Quinta">Quinta</option>
+                                <option value="Sexta">Sexta</option>
+                            </select>
+                        </div>
+                        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                            <button class="btn outline" id="limparAgendaBtn">Limpar exemplos</button>
+                        </div>
+                    </div>
+
+                    <div class="agenda-grid" id="agendaGrid" aria-live="polite"></div>
+
+                    <details style="margin-top:14px">
+                        <summary style="cursor:pointer;color:var(--accent);font-weight:600">Adicionar sessão</summary>
+                        <form id="agendaForm" onsubmit="return handleAgendaAdd(event)" style="margin-top:12px">
+                            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;align-items:end">
+                                <div>
+                                    <label for="dia" style="display:block;color:var(--muted);font-size:13px">Dia</label>
+                                    <select id="dia" name="dia" required>
+                                        <option value="Segunda">Segunda</option>
+                                        <option value="Terça">Terça</option>
+                                        <option value="Quarta">Quarta</option>
+                                        <option value="Quinta">Quinta</option>
+                                        <option value="Sexta">Sexta</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="inicio" style="display:block;color:var(--muted);font-size:13px">Início</label>
+                                    <input id="inicio" name="inicio" type="time" min="10:00" max="19:00" required>
+                                </div>
+                                <div>
+                                    <label for="fim" style="display:block;color:var(--muted);font-size:13px">Fim</label>
+                                    <input id="fim" name="fim" type="time" min="10:00" max="19:59" required>
+                                </div>
+                                <div>
+                                    <label for="cliente" style="display:block;color:var(--muted);font-size:13px">Cliente</label>
+                                    <input id="cliente" name="cliente" type="text" placeholder="Nome do cliente" required>
+                                </div>
+                                <div>
+                                    <label for="descricao" style="display:block;color:var(--muted);font-size:13px">Descrição</label>
+                                    <input id="descricao" name="descricao" type="text" placeholder="Ex: Fineline no pulso">
+                                </div>
+                                <div>
+                                    <button class="btn" type="submit">Adicionar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </details>
                 </div>
             </section>
 
@@ -639,6 +700,166 @@
 
         // Inicializar gerenciador de temas
         const themeManager = new ThemeManager();
+
+        // -------- Agenda --------
+        const AGENDA_KEY = 'agenda-items-v2';
+        const DIAS = ['Segunda','Terça','Quarta','Quinta','Sexta'];
+        let selectedDiaMobile = null;
+
+        
+
+        function carregarAgenda() {
+            try {
+                const rawV2 = localStorage.getItem(AGENDA_KEY);
+                if (rawV2) return JSON.parse(rawV2);
+                // tentativa de migração a partir da versão v1 (campo 'hora')
+                const rawV1 = localStorage.getItem('agenda-items-v1');
+                if (!rawV1) return [];
+                const v1 = JSON.parse(rawV1);
+                const migrado = v1.map(it => {
+                    const inicio = it.hora || '10:00';
+                    const [hh, mm] = inicio.split(':').map(Number);
+                    const endH = Math.min(hh + 1, 19);
+                    const fim = `${String(endH).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+                    return { dia: it.dia, inicio, fim, cliente: it.cliente, descricao: it.descricao };
+                });
+                salvarAgenda(migrado);
+                return migrado;
+            } catch { return []; }
+        }
+        function salvarAgenda(items) {
+            localStorage.setItem(AGENDA_KEY, JSON.stringify(items));
+        }
+
+        function gerarExemplosSeVazio() {
+            let items = carregarAgenda();
+            if (items.length) return;
+            items = [
+                { dia:'Segunda', inicio:'10:30', fim:'11:30', cliente:'Ana P.', descricao:'Avaliação — fineline' },
+                { dia:'Terça', inicio:'14:00', fim:'16:00', cliente:'Lucas M.', descricao:'Realismo braço — sessão 2' },
+                { dia:'Quarta', inicio:'11:15', fim:'12:15', cliente:'Juliana', descricao:'Minimalista — coração' },
+                { dia:'Quinta', inicio:'16:00', fim:'17:00', cliente:'Bruno', descricao:'Fechamento de orçamento' },
+                { dia:'Sexta', inicio:'18:00', fim:'19:00', cliente:'Camila', descricao:'Retoque' }
+            ];
+            salvarAgenda(items);
+        }
+
+        function hmToMinutes(hm) {
+            const [h,m] = hm.split(':').map(Number);
+            return h*60+m;
+        }
+
+        function renderizarAgenda() {
+            const grid = document.getElementById('agendaGrid');
+            if (!grid) return;
+            const items = carregarAgenda();
+
+            // Construir estrutura por dia
+            const porDia = Object.fromEntries(DIAS.map(d => [d, []]));
+            for (const it of items) {
+                if (porDia[it.dia]) porDia[it.dia].push(it);
+            }
+            DIAS.forEach(d => porDia[d].sort((a,b)=> (a.inicio||'').localeCompare(b.inicio||'')));
+
+            const isMobile = window.innerWidth <= 700;
+            const diasParaMostrar = isMobile && selectedDiaMobile ? [selectedDiaMobile] : DIAS;
+
+            // Gerar HTML
+            grid.innerHTML = diasParaMostrar.map(dia => {
+                const slots = [];
+                for (let h = 10; h <= 19; h++) {
+                    const hh = String(h).padStart(2,'0') + ':00';
+                    const slotStartMin = hmToMinutes(hh);
+                    const slotEndMin = hmToMinutes(String(h+1).padStart(2,'0')+':00');
+                    const covering = porDia[dia].find(it => {
+                        if (!it.inicio || !it.fim) return false;
+                        const ini = hmToMinutes(it.inicio);
+                        const end = hmToMinutes(it.fim);
+                        return slotStartMin < end && slotEndMin > ini;
+                    }) || null;
+
+                    let classe = '';
+                    let conteudo = `<div class="livre">Livre</div>`;
+                    if (covering) {
+                        const ini = hmToMinutes(covering.inicio);
+                        const end = hmToMinutes(covering.fim);
+                        const isStart = ini >= slotStartMin && ini < slotEndMin;
+                        const isEnd = end > slotStartMin && end <= slotEndMin;
+                        classe = `ocupado ${isStart ? 'start' : isEnd ? 'end' : 'middle'}`;
+                        if (isStart) {
+                            conteudo = `<div class=\"sessao\"><div class=\"cliente\">${covering.cliente}</div><div class=\"desc\">${covering.descricao || ''}</div><div class=\"intervalo\">${covering.inicio}–${covering.fim}</div></div>`;
+                        } else {
+                            conteudo = `<div class=\"sessao-cont\"></div>`;
+                        }
+                    } else {
+                        // marca livre para conectar blocos livres visualmente
+                        classe = 'livre middle';
+                    }
+
+                    slots.push(`
+                        <div class="agenda-slot ${classe}">
+                            <div class="hora">${hh}</div>
+                            ${conteudo}
+                        </div>
+                    `);
+                }
+                return `
+                    <div class="agenda-col">
+                        <div class="agenda-dia">${dia}</div>
+                        ${slots.join('')}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleAgendaAdd(e) {
+            e.preventDefault();
+            const f = e.target;
+            const data = Object.fromEntries(new FormData(f).entries());
+            if (!DIAS.includes(data.dia)) return false;
+            if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(data.inicio)) return false;
+            if (!/^([0-1]\d|2[0-3]):[0-5]\d$/.test(data.fim)) return false;
+            if (hmToMinutes(data.fim) <= hmToMinutes(data.inicio)) { alert('Horário de fim deve ser após o início.'); return false; }
+            const items = carregarAgenda();
+            items.push({ dia: data.dia, inicio: data.inicio, fim: data.fim, cliente: data.cliente, descricao: data.descricao });
+            salvarAgenda(items);
+            renderizarAgenda();
+            f.reset();
+            return false;
+        }
+
+        function initAgenda() {
+            const limparBtn = document.getElementById('limparAgendaBtn');
+            const diaMobileSel = document.getElementById('agendaDiaMobile');
+            
+            // Seleciona dia atual por padrão (seg-sex). Sabado/Domingo => Segunda
+            const hoje = new Date();
+            const dow = hoje.getDay(); // 0=Dom,1=Seg..6=Sab
+            const mapDow = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta'};
+            selectedDiaMobile = mapDow[dow] || 'Segunda';
+            if (diaMobileSel) {
+                diaMobileSel.value = selectedDiaMobile;
+                diaMobileSel.addEventListener('change', (e) => {
+                    selectedDiaMobile = e.target.value;
+                    renderizarAgenda();
+                });
+            }
+            // Re-render em resize para alternar entre mobile/desktop
+            window.addEventListener('resize', () => {
+                renderizarAgenda();
+            });
+            if (limparBtn) {
+                limparBtn.addEventListener('click', () => {
+                    localStorage.removeItem(AGENDA_KEY);
+                    gerarExemplosSeVazio();
+                    renderizarAgenda();
+                });
+            }
+            gerarExemplosSeVazio();
+            renderizarAgenda();
+        }
+
+        document.addEventListener('DOMContentLoaded', initAgenda);
     </script>
 </body>
 
