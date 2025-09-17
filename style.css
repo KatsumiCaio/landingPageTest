@@ -9,6 +9,39 @@
     color-scheme: dark;
 }
 
+/* Tema Light */
+[data-theme="light"] {
+    --bg: #ffffff;
+    --card: #f8f9fa;
+    --accent: #c9a25c;
+    --muted: #6c757d;
+    --glass: rgba(0, 0, 0, 0.04);
+    color-scheme: light;
+}
+
+[data-theme="light"] body {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #212529;
+}
+
+[data-theme="light"] .card {
+    background: var(--card);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .faq-answer {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .modal {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="light"] .modal-carousel-container {
+    background: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -61,6 +94,45 @@ nav {
     display: flex;
     gap: 24px;
     align-items: center;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--muted);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+[data-theme="light"] .theme-toggle {
+    border-color: rgba(0, 0, 0, 0.2);
+    color: var(--muted);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
 }
 
 nav a {
@@ -731,16 +803,25 @@ aside>.card+.card {
         display: flex;
     }
 
-    .mobile-toggle {
-        display: block;
+    .header-controls {
         position: absolute;
         right: 18px;
         top: 18px;
         z-index: 1002;
+    }
+
+    .mobile-toggle {
+        display: block;
         background: none;
         border: none;
         font-size: 2.2rem;
         color: var(--accent);
         cursor: pointer;
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
     }
 }
