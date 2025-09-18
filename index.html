@@ -41,6 +41,45 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TattooParlor",
+      "name": "Arte na Pele",
+      "description": "Estúdio de tatuagem especializado em arte exclusiva, fineline, realismo e minimalismo.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Exemplo, 123",
+        "addressLocality": "Cidade",
+        "addressRegion": "SP",
+        "postalCode": "01234-567",
+        "addressCountry": "BR"
+      },
+      "telephone": "+55-11-99999-9999",
+      "email": "contato@artenapele.com",
+      "url": "https://artenapele.com",
+      "image": "https://artenapele.com/images/logo.png",
+      "priceRange": "$",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "10:00",
+          "closes": "19:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/artenapele",
+        "https://www.facebook.com/artenapele"
+      ]
+    }
+    </script>
 </head>
 
 <body>
@@ -271,45 +310,53 @@
             </section>
 
             <section id="contato">
-                <h2 class="section-title">Contato</h2>
-                <div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
-                    <div style="flex:1;min-width:220px">
-                        <div style="font-weight:700">Entre em contato</div>
-                        <div style="color:var(--muted);margin-top:6px">Telefone: <a href="tel:+551199999999"
-                                style="color:var(--accent)">+55 (11) 99999-9999</a></div>
-                        <div style="color:var(--muted);margin-top:6px">Email: <a href="mailto:contato@artenapele.com"
-                                style="color:var(--accent)">contato@artenapele.com</a></div>
-                        <div style="margin-top:8px;color:var(--muted);display:flex;align-items:center;gap:12px"
-                            class="social-icons">
-                            <span style="display:inline-flex;align-items:center;gap:4px">
-                                <a href="#" style="color:var(--accent);display:inline-flex;align-items:center"
-                                    aria-label="Instagram">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448"
-                                        fill="none">
-                                        <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c" />
-                                        <g>
-                                            <circle cx="224" cy="224" r="80" fill="#181818" fill-opacity="0.9" />
-                                            <circle cx="224" cy="224" r="60" fill="none" stroke="#fff"
-                                                stroke-width="12" />
-                                            <circle cx="320" cy="128" r="24" fill="#fff" />
-                                        </g>
-                                    </svg>
-                                </a>
-                            </span>
-                            •
-                            <span style="display:inline-flex;align-items:center;gap:4px">
-                                <a href="#" style="color:var(--accent);display:inline-flex;align-items:center"
-                                    aria-label="Facebook">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448"
-                                        fill="none">
-                                        <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c" />
-                                        <path
-                                            d="M280 160h-32c-8.8 0-16 7.2-16 16v32h48v48h-48v96h-48v-96h-32v-48h32v-32c0-35.3 28.7-64 64-64h32v48z"
-                                            fill="#181818" />
-                                    </svg>
-                                </a>
-                            </span>
+                <h2 class="section-title">Entre em Contato</h2>
+                <div class="contato-container">
+                    <div class="contato-info card">
+                        <h3>Informações de Contato</h3>
+                        <p>Você pode nos encontrar no endereço abaixo ou entrar em contato por telefone ou e-mail.</p>
+                        <ul>
+                            <li><strong>Endereço:</strong> Rua Exemplo, 123 — Bairro, Cidade</li>
+                            <li><strong>Telefone:</strong> <a href="tel:+551199999999">+55 (11) 99999-9999</a></li>
+                            <li><strong>Email:</strong> <a href="mailto:contato@artenapele.com">contato@artenapele.com</a></li>
+                        </ul>
+                        <div class="social-icons">
+                            <a href="#" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448" fill="none">
+                                    <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c"></rect>
+                                    <g>
+                                        <circle cx="224" cy="224" r="80" fill="#181818" fill-opacity="0.9"></circle>
+                                        <circle cx="224" cy="224" r="60" fill="none" stroke="#fff" stroke-width="12"></circle>
+                                        <circle cx="320" cy="128" r="24" fill="#fff"></circle>
+                                    </g>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 448 448" fill="none">
+                                    <rect x="40" y="40" width="368" height="368" rx="110" fill="#c9a25c"></rect>
+                                    <path d="M280 160h-32c-8.8 0-16 7.2-16 16v32h48v48h-48v96h-48v-96h-32v-48h32v-32c0-35.3 28.7-64 64-64h32v48z" fill="#181818"></path>
+                                </svg>
+                            </a>
                         </div>
+                    </div>
+                    <div class="contato-form card">
+                        <h3>Envie uma Mensagem</h3>
+                        <form action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="c9a25c5c-c9a2-5c5c-c9a2-5c5c5c5c5c5c">
+                            <div class="form-group">
+                                <label for="name">Nome</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensagem</label>
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Enviar Mensagem</button>
+                        </form>
                     </div>
                 </div>
             </section>
