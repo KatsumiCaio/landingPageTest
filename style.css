@@ -755,8 +755,8 @@ footer {
     display: block;
 }
 
-.card .localizacao-btn {
-    margin-top: 0;
+.map-container {
+    margin-top: 18px;
 }
 
 /* Espaçamento entre cards do aside */
