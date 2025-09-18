@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/logo.png">
     <link rel="manifest"
-        href="data:application/json,{'name':'Arte na Pele','icons':[{'src':'images/logo.png','sizes':'192x192','type':'image/png'}]}">
+        href="data:application/json,{'name':'Arte na Pele','icons':[{'src':'images/logo.png','sizes':'192x192','type':'image/png'}]}'">
 
     <!-- Meta tags para SEO e compartilhamento -->
     <meta name="description"
@@ -81,7 +81,6 @@
     }
     </script>
 </head>
-
 <body>
     <div class="container">
         <header>
@@ -173,7 +172,7 @@
                 </aside>
             </section>
 
-            <section id="servicos">
+            <section id="servicos" class="hidden">
                 <h2 class="section-title">Serviços</h2>
                 <div class="services">
                     <div class="service card">
@@ -194,7 +193,7 @@
                 </div>
             </section>
 
-            <section id="portfolio">
+            <section id="portfolio" class="hidden">
                 <h2 class="section-title">Portfólio</h2>
                 <div class="gallery" id="gallery">
                     <picture>
@@ -224,7 +223,7 @@
                 </div>
             </section>
 
-            <section id="agenda">
+            <section id="agenda" class="hidden">
                 <h2 class="section-title">Agenda</h2>
                 <div class="card">
                     <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px">
@@ -243,7 +242,7 @@
                 </div>
             </section>
 
-            <section id="depoimentos">
+            <section id="depoimentos" class="hidden">
                 <h2 class="section-title">Depoimentos de Clientes</h2>
                 <div class="depoimentos"
                     style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
@@ -292,7 +291,7 @@
                 </div>
             </section>
 
-            <section id="faq">
+            <section id="faq" class="hidden">
                 <h2 class="section-title">Perguntas Frequentes (FAQ)</h2>
                 <div class="faq-list">
                     <div class="faq-item">
@@ -329,7 +328,7 @@
                 </div>
             </section>
 
-            <section id="contato">
+            <section id="contato" class="hidden">
                 <h2 class="section-title">Entre em Contato</h2>
                 <div class="contato-container">
                     <div class="contato-info card">
@@ -860,6 +859,20 @@
         }
 
         document.addEventListener('DOMContentLoaded', initAgenda);
+    </script>
+    <script defer>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                } else {
+                    entry.target.classList.remove('show');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
     </script>
 </body>
 
