@@ -54,6 +54,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -158,12 +162,11 @@ nav a.cta {
     grid-template-columns: 1fr 420px;
     gap: 32px;
     align-items: center;
-    padding: 40px 0;
+    padding: 64px 0;
 }
 
 .hero-left h1 {
-    font-family: Playfair Display, serif;
-    font-size: 44px;
+    font-size: 60px;
     margin: 0 0 12px;
 }
 
@@ -237,11 +240,10 @@ a:hover {
 }
 
 section {
-    padding: 48px 0;
+    padding: 64px 0;
 }
 
 h2.section-title {
-    font-family: Playfair Display, serif;
     margin: 0 0 18px;
     font-size: 28px;
 }
@@ -656,7 +658,7 @@ footer {
     .hero {
         grid-template-columns: 1fr;
         gap: 18px;
-        padding: 24px 0;
+        padding: 32px 0;
     }
 
     .hero-left h1 {
@@ -1007,7 +1009,6 @@ aside>.card+.card {
 
 .contato-info h3,
 .contato-form h3 {
-    font-family: 'Playfair Display', serif;
     font-size: 24px;
     margin-bottom: 16px;
     color: var(--accent);
