@@ -3,6 +3,7 @@
     --bg: #181818;
     --card: #222224;
     --accent: #c9a25c;
+    --cta-color: #CC5500;
     --muted: #b8b8b8;
     --glass: rgba(255, 255, 255, 0.04);
     --maxw: 1100px;
@@ -13,7 +14,7 @@
 [data-theme="light"] {
     --bg: #ffffff;
     --card: #f8f9fa;
-    --accent: #c9a25c;
+    --accent: #a17e49;
     --muted: #6c757d;
     --glass: rgba(0, 0, 0, 0.04);
     color-scheme: light;
@@ -145,7 +146,7 @@ nav a {
 }
 
 nav a.cta {
-    background: var(--accent);
+    background: var(--cta-color);
     color: white;
     padding: 10px 14px;
 }
@@ -182,7 +183,7 @@ nav a.cta {
 }
 
 .btn {
-    background: var(--accent);
+    background: var(--cta-color);
     color: white;
     padding: 12px 18px;
     border-radius: 8px;
