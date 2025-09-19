@@ -1,0 +1,34 @@
+/* styles/about.css */
+.sobre-container {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.sobre-imagem img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.sobre-texto .section-title {
+    margin-bottom: 8px;
+}
+
+.sobre-texto h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.sobre-texto p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
