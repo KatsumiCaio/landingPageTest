@@ -1,9 +1,27 @@
+function validateEmail(email) {
+    const re = /^(([^<>()[\\]\\.,;:\\s@\"]+(\\.[^<>()[\\]\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.`1`{1,3}\\.`1`{1,3}\\.`1`{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 async function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const feedbackEl = document.getElementById('form-feedback');
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+
+    // Validation
+    if (!data.name || !data.email || !data.message) {
+        feedbackEl.textContent = 'Por favor, preencha todos os campos.';
+        feedbackEl.className = 'visible error';
+        return;
+    }
+
+    if (!validateEmail(data.email)) {
+        feedbackEl.textContent = 'Por favor, insira um email válido.';
+        feedbackEl.className = 'visible error';
+        return;
+    }
 
     feedbackEl.textContent = 'Enviando...';
     feedbackEl.className = 'visible sending';
