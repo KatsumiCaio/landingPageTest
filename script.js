@@ -161,17 +161,46 @@ document.querySelectorAll('#gallery img').forEach(img => {
 });
 function closeModal() { document.getElementById('modal').classList.remove('open') }
 document.getElementById('modal').addEventListener('click', (e) => { if (e.target.id === 'modal') closeModal() })
-
-function handleBooking(e) {
+async function handleFormSubmit(e) {
     e.preventDefault();
-    const f = e.target;
-    // coletar dados — aqui você pode integrar com backend ou serviço de email
-    const data = Object.fromEntries(new FormData(f).entries());
-    // simples feedback visual
-    alert('Obrigado, ' + (data.nome || '') + '! Recebemos sua solicitação e vamos responder em breve.');
-    f.reset();
-    return false;
+    const form = e.target;
+    const feedbackEl = document.getElementById('form-feedback');
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    feedbackEl.textContent = 'Enviando...';
+    feedbackEl.className = 'visible sending';
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            feedbackEl.textContent = 'Obrigado! Sua mensagem foi enviada com sucesso.';
+            feedbackEl.className = 'visible success';
+            form.reset();
+        } else {
+            throw new Error(result.message || 'Ocorreu um erro.');
+        }
+    } catch (error) {
+        feedbackEl.textContent = 'Erro ao enviar a mensagem. Tente novamente mais tarde.';
+        feedbackEl.className = 'visible error';
+    } finally {
+        setTimeout(() => {
+            feedbackEl.className = '';
+        }, 5000); // Esconde a mensagem após 5 segundos
+    }
 }
+
+document.getElementById('contact-form')?.addEventListener('submit', handleFormSubmit);
 
 // Fecha o menu e faz scroll suave ao clicar em um link do menu mobile
 function handleNavLinkClick(e) {
